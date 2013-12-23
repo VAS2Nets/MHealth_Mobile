@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fuse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+
+    <!-- jQueryMobileCSS - original without styling -->
+    <link rel="stylesheet" href="css/jquerymobile.css" />
+
+    <!-- nativeDroid core CSS -->
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+    <!-- nativeDroid: Light/Dark -->
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css" id='jQMnDTheme' />
+
+    <!-- nativeDroid: Color Schemes -->
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.purple.css" id='jQMnDColor' />
+
+    <!-- jQuery / jQueryMobile Scripts -->
+    <script src="js/jquery1-9.min.js"></script>
+    <script src="js/jquery.mobile.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" src="smsplugin.js"></script>
+    
+    <script>
+    	$(document).ready(function(){
+		$("#subscribebutton").click(function(){
+		//$('#subform').submit(function() {
+		//localStorage.clear();
+		var phone = $('#phone').val();
+		var service = $('#service').val();
+		var receiver = 35123;
+  		alert(receiver);
+  		alert(service);
+   		// $.mobile.loading("show");
+  		SmsPlugin.prototype.send(receiver, service, '',
+     	 function () {
+          //$.mobile.loading("hide");
+         alert('Message sent successfully');
+      },
+      function (e) {
+         //$.mobile.loading("hide");
+          alert('Message Failed:' + e);
+      }
+  		);              
+		//});
+		return false;
+		});
+		});
+    </script>
+    <script>
+    	 $(document).ready(function(){
+		$("#unsubscribebutton").click(function(){
+		//$('#subform').submit(function() {
+		localStorage.clear();
+		var phone = $('#phone').val();
+		var serv = $('#service').val();
+		var optout = "STOP ";
+		//service = document.getElementById('service' + optout);
+		var service = optout + serv;
+		var receiver = 35123;
+ 		 alert(receiver);
+ 		 alert(service);
+  		 // $.mobile.loading("show");
+ 		 SmsPlugin.prototype.send(receiver, service, '',
+      function () {
+        //  $.mobile.loading("hide");
+         alert('Message sent successfully');
+      },
+      function (e) {
+        // $.mobile.loading("hide");
+          alert('Message Failed:' + e);
+      }
+ 	 );              
+	//});
+	return false;
+	});
+	});
+ 
+    </script>
+    
+    </head>
+<body>
+
+	<!-- Home Page -->
+    <div data-role="page" id='home' data-theme='b'>
+    	<div data-role="panel" id="mypanel" data-theme="b" >
+    	   <div>
+           <ul data-role="listview" data-icon="false" >
+                <li data-role="list-divider">Categories</li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;HIV/AIDS</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Hypertension</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Diabetes</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Typhoid</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Exercise and fitness</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;General health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;STD</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Amenorrhea</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cancer</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fertility</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cholesterol</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Blood sugar control</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Women's health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fibroids</i></a></li>
+                
+            </ul>
+            </div>
+        </div>
+        
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+            <a href="#mypanel" data-theme='b'><i class='icon-reorder'></i></a>
+            <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+            <a href='#' data-theme='b'><i class='icon-envelope-alt'></i></a>
+             <div data-role="navbar" id="navbar" data-iconpos="top" style='border-top:1px solid #CF9FE7;background-color:#ffad01;'>
+                <ul>
+                    <li style='border-right:1px solid #22297a;border-bottom:7px solid #1c4f88'><a href="#">Home</a></li>
+                    <li style='border-right:1px solid #22297a'><a href="#">Call</a></li>
+                    <li><a href="#">Chat</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        
+       <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+         	
+         	
+         <div id='activity' style='background-color:white;margin-top:15px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+         	<div style='height:30px;background-color:#1c4f88;color:white;padding:10px;'><h3>Features</h3></div>
+         	 	<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
+            		<li data-role="list-divider" style='background-color:#ffad01;color:white'></li>
+            		<li>
+            		  <a href='#'>
+            		    <img src='img/150x150.gif' width='80' height='80' style='border-radius:6px;' />
+                		<h2>Dial Doctor</h2>
+                		<!-- <p>Mobile Transfer    - N1,000</p>
+                		<p class="ui-li-aside"><strong>6:24</strong>PM</p>  -->
+                	  </a>
+            		</li>
+            		<li>
+            		 <a href='#'>
+            			<img src='img/150x150.gif' width='80' height='80' style='border-radius:6px;' />
+                		<h2>Health Tips</h2>	
+                	 </a>
+            		</li>
+            		<li>
+            		 <a href='#'>
+            			<img src='img/150x150.gif' width='80' height='80' style='border-radius:6px;'  />
+                		<h2>Doctors Profile</h2>
+                	 </a>
+            		</li>
+            		<li>
+            		 <a href='#'>
+            			<img src='img/150x150.gif' width='80' height='80' style='border-radius:6px;' />
+                		<h2>About m-Health</h2>	
+                	 </a>
+            		</li>
+            		<li>
+            		 <a href='#'>
+            			<img src='img/150x150.gif' width='80' height='80' style='border-radius:6px;' />
+                		<h2>Terms & Conditions</h2>
+                	 </a>
+            		</li>
+            		 
+            	</ul>
+         	</div>
+         
+         </div>
+        </div>
+        
+    
+    </div>
+    
+    
+    <!-- health tip Page -->
+    <div data-role="page" id='healthtips' data-theme='b'>
+    	<div data-role="panel" id="mypanel" data-theme="b" >
+    	   <div>
+           <ul data-role="listview" data-icon="false" >
+                <li data-role="list-divider">Categories</li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;HIV/AIDS</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Hypertension</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Diabetes</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Typhoid</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Exercise and fitness</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;General health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;STD</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Amenorrhea</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cancer</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fertility</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cholesterol</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Blood sugar control</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Women's health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fibroids</i></a></li>
+                
+            </ul>
+            </div>
+        </div>
+        
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+            <a href="#mypanel" data-theme='b'><i class='icon-reorder'></i></a>
+            <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+            <a href='#' data-theme='b'><i class='icon-envelope-alt'></i></a>
+        </div>
+        
+        
+       <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+         	
+         	
+         <div id='activity' style='background-color:white;margin-top:15px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+         	
+         
+         </div>
+        </div>
+        
+    
+    </div>
+    
+     <!-- Doctor profile Page -->
+    <div data-role="page" id='doctorprofile' data-theme='b'>
+    	<div data-role="panel" id="mypanel" data-theme="b" >
+    	   <div>
+           <ul data-role="listview" data-icon="false" >
+                <li data-role="list-divider">Categories</li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;HIV/AIDS</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Hypertension</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Diabetes</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Typhoid</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Exercise and fitness</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;General health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;STD</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Amenorrhea</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cancer</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fertility</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cholesterol</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Blood sugar control</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Women's health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fibroids</i></a></li>
+                
+            </ul>
+            </div>
+        </div>
+        
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+            <a href="#mypanel" data-theme='b'><i class='icon-reorder'></i></a>
+            <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+            <a href='#' data-theme='b'><i class='icon-envelope-alt'></i></a>
+        </div>
+        
+        
+       <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+         	
+         	
+         <div id='activity' style='background-color:white;margin-top:15px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+         	
+         
+         </div>
+        </div>
+        
+    
+    </div>
+    
+    
+     <!-- Terms and Conditions Page -->
+    <div data-role="page" id='termsandconditions' data-theme='b'>
+    	<div data-role="panel" id="mypanel" data-theme="b" >
+    	   <div>
+           <ul data-role="listview" data-icon="false" >
+                <li data-role="list-divider">Categories</li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;HIV/AIDS</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Hypertension</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Diabetes</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Typhoid</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Exercise and fitness</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;General health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;STD</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Amenorrhea</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cancer</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fertility</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cholesterol</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Blood sugar control</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Women's health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fibroids</i></a></li>
+                
+            </ul>
+            </div>
+        </div>
+        
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+            <a href="#mypanel" data-theme='b'><i class='icon-reorder'></i></a>
+            <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+            <a href='#' data-theme='b'><i class='icon-envelope-alt'></i></a>
+        </div>
+        
+        
+       <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+         	
+         	
+         <div id='activity' style='background-color:white;margin-top:15px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+         	
+         
+         </div>
+        </div>
+        
+    
+    </div>
+ 	
+ 	 <!-- Subscription Page -->
+     <div data-role="page" id='subscribe' data-theme='b'>
+    	<div data-role="panel" id="mypanel" data-theme="b" >
+    	   <div>
+           <ul data-role="listview" data-icon="false" >
+                <li data-role="list-divider">Categories</li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;HIV/AIDS</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Hypertension</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Diabetes</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Typhoid</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Exercise and fitness</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;General health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;STD</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Amenorrhea</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cancer</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fertility</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Cholesterol</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Blood sugar control</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Women's health</i></a></li>
+                <li><a href="#subscribe"><i class="fa fa-stethoscope">&nbsp;&nbsp;&nbsp;&nbsp;Fibroids</i></a></li>
+                
+            </ul>
+            </div>
+        </div>
+        
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+            <a href="#mypanel" data-theme='b'><i class='icon-reorder'></i></a>
+            <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+            <a href='#' data-theme='b'><i class='icon-envelope-alt'></i></a>
+        </div>
+        
+        
+       <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+           <form action="" method="POST" id="subform">
+      <!-- /demo-html -->
+      <div data-demo-html="true">
+        <label for="phone">Phone Number:</label>
+        <input type="text" placeholder="234XXXXXXXXXX" name="phone" pattern="[0-9]*" id="phone" value="" autocomplete="off" required />
+      </div>
+      <div>
+        <label>MHealth Service:</label>
+        <select name="service" id="service">
+        <option value="HIV/AIDS">HIV/AIDS</option>
+        <option value="Hypertension">Hypertension</option>
+        <option value="Diabetes">Diabetes</option>
+        <option value="Typhoid">Typhoid</option>
+        <option value="Exercise and Fitness">Exercise and Fitness</option>
+        <option value="General health">General health</option>
+        <option value="STD">STD</option>
+        <option value="Amenorrhoea">Amenorrhoea</option>
+        <option value="Fertility">Fertility</option>
+        <option value="Cholesterol">Cholesterol</option>
+        <option value="Blood sugar control">Blood sugar control</option>
+        <option value="Women's health">Women's health</option>
+        <option value="Fibroids">Fibroids</option>
+        <option value="Cancer">Cancer</option>
+        <option value="Pelvic Inflammatory Disease">Pelvic Inflammatory Disease</option>
+        <otion value="Pregnancy">Pregnancy</option>
+        </select>
+      </div>
+      <!-- /demo-html -->
+      <div> 
+      <button type="submit" id='subscribebutton' data-mini="true" data-inline="true">
+      <a href="#"><i class="fa fa-sign-in fa-lg"></i> Subscribe</a></button>
+      <button type="submit" id='unsubscribebutton' data-mini="true" data-inline="true">
+      <a href="#"><i class="fa fa-sign-out"></i> Unsubscribe</a></button>
+      
+      </div>
+
+     </form>	
+         <div id='activity' style='background-color:white;margin-top:15px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+         	
+         
+         </div>
+        </div>
+        
+    
+    </div>
+           
+         
+         
+      <script src='js/nativedroid.script.js'></script>
+</body>
+</html>

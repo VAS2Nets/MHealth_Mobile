@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mHealth</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
+
+        <!-- jQueryMobileCSS - original without styling -->
+        <link rel="stylesheet" href="css/jquerymobile.css" />
+
+        <!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+        <!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css" id='jQMnDTheme' />
+
+        <!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.purple.css" id='jQMnDColor' />
+
+        <!-- jQuery / jQueryMobile Scripts -->
+        <script src="js/jquery1-9.min.js"></script>
+        <script src="js/jquery.mobile.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" src="smsplugin.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $("#register").click(function(){
+                    var phone = $('#phone').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "http://83.138.190.170/mhealthmobile/signup.php",
+                        data: {'phone': phone },
+                        success: function (response) {
+                            if(response == "truey"){
+                            alert('Registration successful! Your registration details has been sent to your phone number. Thank you');
+                            self.location="main.html";  
+                            }else{
+                                alert('Registration failed')
+                            }
+                        },
+                        error: function(xhr, status, thrown){
+                            alert("Resgistration Error");
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+
+        <!-- Login Page -->
+        <div data-role="page" id='home' data-theme='b'>
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <a href="main.html" data-theme='b'><i class='icon-reorder'></i></a>
+                <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+                <a href='index.html' data-theme='b'><i class='icon-home'></i></a>
+            </div>
+
+
+            <div data-role='content' id='home' style='background-color:#e2e2e2; height:800px; padding:10px'>
+                <div id='activity' style='background-color:white;margin:10px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+                    <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
+                        <li data-role="list-divider" style='background-color:#ffad01;color:white'></li>
+                        <li>
+                            <h2 style='text-align:center;color:#e67817'>Register on mHealth Mobile</h2>
+                            <form action="" method="POST" id="subform" style="margin-left: 5px; margin-right: 5px">
+                                <div data-demo-html="true">
+                                    <label for="phone">Phone Number:</label>
+                                    <input type="text" placeholder="234XXXXXXXXXX" name="phone" pattern="[0-9]*" id="phone" value="" autocomplete="off" required />
+                                </div>
+                                <div>
+                                    <button type="submit" id='register' data-mini="true" data-inline="true">
+                                        <a href="#"><i class="buttony fa-sign-in fa-lg"></i>Register</a></button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- Subscription Page -->
+        
+
+
+        <script src='js/nativedroid.script.js'></script>
+    </body>
+</html>

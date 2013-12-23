@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mHealth</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
+
+        <!-- jQueryMobileCSS - original without styling -->
+        <link rel="stylesheet" href="css/jquerymobile.css" />
+
+        <!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+        <!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.dark.css" id='jQMnDTheme' />
+
+        <!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+
+        <!-- jQuery / jQueryMobile Scripts -->
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+
+        <!-- jQuery / jQueryMobile Scripts -->
+        <script src="js/jquery1-9.min.js"></script>
+        <script src="js/jquery.mobile.min.js"></script>
+        <script src="http://cdn.pubnub.com/pubnub-3.4.4.js"></script>
+        <style>
+            body
+            {
+                color: black;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div data-role="content">
+            <!--<div data-nativedroid-plugin="splashscreen" data-nativedroid-splashscreen-time="4" data-nativedroid-splashscreen-animation="fadeOut" data-nativedroid-background="img/accessbackground.jpg">
+        <div class='splashScreenExample'>
+            <h1>FUSE</h1>
+            <h2>...powered by VAS2NETs Technology</h2>
+            <div class='splashScreenDroid'>
+                <img src='img/vaslogo.png' />
+            </div>
+        </div>
+    </div>-->
+            <!--<div data-nativedroid-plugin='lockscreen' data-nativedroid-background="img/accessbackground.jpg" data-nativedroid-lockscreen-animation="fadeOut" data-nativedroid-lockscreen-delay="25">
+                <div class='inset' style='color:white'>
+                    <h3>Lockscreen</h3>
+                    <p>Hi, I'm Access Mobi lockscreen. You see me because you where inactive for more than 30seconds.</p>
+                    <div class='unlock'><i class='icon-unlock'></i>Unlock me.</div>
+                </div>
+            </div>-->
+
+            <div data-nativedroid-plugin="homescreen" data-nativedroid-background="img/Mobile App.jpg">
+                <div data-nativedroid-role='screenslide'>
+
+                    <!--  <div data-nativedroid-role='widget'
+                              data-nativedroid-widget-type="clock"
+                              data-nativedroid-widget-clock-lang="en"
+                              data-nativedroid-widget-clock-format="short"
+                              data-nativedroid-widget-width='2'
+                              data-nativedroid-widget-height='1'
+                              data-nativedroid-widget-offset-top='0'
+                              data-nativedroid-widget-offset-left='1'>
+                          </div>  -->
+
+                    <div data-nativedroid-role='widget'
+                         data-nativedroid-widget-type='icon'
+                         data-nativedroid-widget-icon-type='text'
+                         data-nativedroid-widget-icon-class='icon-phone'
+                         data-nativedroid-widget-icon-title='Call a Doctor'
+                         data-nativedroid-widget-icon-link='tel:35123'
+                         data-nativedroid-widget-width='1'
+                         data-nativedroid-widget-height='1'
+                         data-nativedroid-widget-offset-top='4'
+                         data-nativedroid-widget-offset-left='0'>
+                    </div>
+
+                    <div data-nativedroid-role='widget'
+                         data-nativedroid-widget-type='icon'
+                         data-nativedroid-widget-icon-type='text'
+                         data-nativedroid-widget-icon-class='icon-stethoscope'
+                         data-nativedroid-widget-icon-title='mHealth '
+                         data-nativedroid-widget-icon-link='main.html'
+                         data-nativedroid-widget-width='1'
+                         data-nativedroid-widget-height='1'
+                         data-nativedroid-widget-offset-top='4'
+                         data-nativedroid-widget-offset-left='1'>
+                    </div>
+
+                    <div data-nativedroid-role='widget'
+                         data-nativedroid-widget-type='icon'
+                         data-nativedroid-widget-icon-type='text'
+                         data-nativedroid-widget-icon-class='icon-user'
+                         data-nativedroid-widget-icon-title='Register'
+                         data-nativedroid-widget-icon-link='register.html'
+                         data-nativedroid-widget-width='1'
+                         data-nativedroid-widget-height='1'
+                         data-nativedroid-widget-offset-top='4'
+                         data-nativedroid-widget-offset-left='2'>
+                    </div>
+
+
+
+
+                    <div data-nativedroid-role='widget'
+                         data-nativedroid-widget-type='icon'
+                         data-nativedroid-widget-icon-type='text'
+                         data-nativedroid-widget-icon-class='icon-exclamation'
+                         data-nativedroid-widget-icon-title='Terms and Conditions'
+                         data-nativedroid-widget-icon-link='main.html#tnc'
+                         data-nativedroid-widget-width='1'
+                         data-nativedroid-widget-height='1'
+                         data-nativedroid-widget-offset-top='4'
+                         data-nativedroid-widget-offset-left='3'>
+                    </div>
+
+                </div>
+
+                <div data-nativedroid-role='screenslide' id='termsandconditions'>
+                    <div id='activity' style='background-color:white;margin:10px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+                        <h2 style='text-align:center;color:#e67817'>About mHealth</h2>
+                        <p>
+                            <strong>Speak to a Doctor</strong><br> Why not dial our short code or long number to speak with our listed Doctors and get professional advice at the cost of a mobile call?
+                        </p>
+                        <p>
+                            <strong>SMS Alerts Tips</strong> <br> Register for medical tips, advice and many more to stay ahead of your personal health programme? Get daily tips that will help take preventive measures so you remain healthy and receive guidance with chronic health conditions such as Diabetes, Cholesterol, Hypertension, etc.
+                        </p><p>
+                            You may also want to take get daily tips for weight loss, stop smoking, pregnancy, women health, men grooming etc. </p>
+                        </div>
+                </div>
+
+
+
+                <div data-nativedroid-role='screenslide'>
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <script src='js/nativedroid.script.js'></script>
+    </body>
+</html>

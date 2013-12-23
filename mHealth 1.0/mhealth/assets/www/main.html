@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mHealth</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
+
+        <!-- jQueryMobileCSS - original without styling -->
+        <link rel="stylesheet" href="css/jquerymobile.css" />
+
+        <!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+        <!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css" id='jQMnDTheme' />
+
+        <!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.purple.css" id='jQMnDColor' />
+
+        <!-- jQuery / jQueryMobile Scripts -->
+        <script src="js/jquery1-9.min.js"></script>
+        <script src="js/jquery.mobile.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" src="smsplugin.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $("#subscribebutton").click(function(){
+                    //$('#subform').submit(function() {
+                    //localStorage.clear();
+                    var phone = $('#phone').val().substr(3);
+                    var service = $('#service').val();
+                    var passcode = $('#passcode').val();
+                    var receiver = 35123;
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "http://83.138.190.170/mhealthmobile/login.php",
+                        data: {'passcode': passcode, 'phone': phone },
+                        success: function (response) {
+                            if(response == "truey"){
+                                SmsPlugin.prototype.send(receiver, service, '',
+                                function () {
+                                    alert('You have requested for the subscription to '+service+' tips on mHealth platform and it will be processed accordingly.');
+                                },
+                                function (e) {
+                                    alert('Message Failed:' + e);
+                                }
+                            );
+                                self.location="main.html";  
+                            }else{
+                                alert('Invalid Login Details')
+                            }
+                        },
+                        error: function(xhr, status, thrown){
+                            alert("Login Error");
+                        }
+                    });
+                                  
+                    //});
+                    return false;
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                $("#unsubscribebutton").click(function(){
+                    //$('#subform').submit(function() {
+                    localStorage.clear();
+                    var phone = $('#phone').val().substr(3);
+                    var serv = $('#service').val();
+                    var passcode = $('#passcode').val();
+                    var optout = "STOP ";
+                    //service = document.getElementById('service' + optout);
+                    var service = optout + serv;
+                    var receiver = 35123;
+                    // $.mobile.loading("show");
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "http://83.138.190.170/mhealthmobile/login.php",
+                        data: {'passcode': passcode, 'phone': phone },
+                        success: function (response) {
+                            if(response == "truey"){
+                                SmsPlugin.prototype.send(receiver, service, '',
+                                function () {
+                                    //  $.mobile.loading("hide");
+                                    alert('You have requested to end the subscription to '+service+' tips on mHealth platform and it will be processed accordingly.');
+                                },
+                                function (e) {
+                                    // $.mobile.loading("hide");
+                                    alert('Message Failed:' + e);
+                                }
+                            ); 
+                                self.location="main.html";  
+                            }else{
+                                alert('Invalid Login Details')
+                            }
+                        },
+                        error: function(xhr, status, thrown){
+                            alert("Login Error");
+                        }
+                    });             
+                    //});
+                    return false;
+                });
+            });
+            
+           
+        </script>
+
+    </head>
+    <body>
+
+        <!-- Home Page -->
+        <div data-role="page" id='home' data-theme='b'>
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <a href="#home" data-theme='b'><i class='icon-reorder'></i></a>
+                <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+                <a href='index.html' data-theme='b'><i class='icon-home'></i></a>
+            </div>
+
+
+            <div data-role='content' id='home' style='background-color:#e2e2e2; height:800px; padding:10px'>
+                <div id='activity' style='background-color:white;margin:10px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+                    <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
+                        <li data-role="list-divider" style='background-color:#ffad01;color:white'></li>
+                        <li>
+                            <a href='tel:35123'>
+                                <img src='img/call.png' width='80' height='80' style='border-radius:6px;' />
+                                <h2>Dial Doctor</h2>
+                                <!-- <p>Mobile Transfer    - N1,000</p>
+                                <p class="ui-li-aside"><strong>6:24</strong>PM</p>  -->
+                            </a>
+                        </li>
+                        <li>
+                            <a href='#subscribe'>
+                                <img src='img/subscribe.png' width='80' height='80' style='border-radius:6px;' />
+                                <h2>Manage mHealth Subscription</h2>
+                            </a>
+                        </li>
+                        <li>
+                            <a href='#'>
+                                <img src='img/tips.png' width='80' height='80' style='border-radius:6px;' />
+                                <h2>Health Tips</h2>	
+                            </a>
+                        </li>
+                        <li>
+                            <a href='#doctorprofile'>
+                                <img src='img/doctor.png' width='80' height='80' style='border-radius:6px;'  />
+                                <h2>Doctors Profile</h2>
+                            </a>
+                        </li>
+                        <li>
+                            <a href='#about'>
+                                <img src='img/about.png' width='80' height='80' style='border-radius:6px;' />
+                                <h2>About mHealth</h2>	
+                            </a>
+                        </li>
+                        <li>
+                            <a href='#tnc'>
+                                <img src='img/tnc.png' width='80' height='80' style='border-radius:6px;' />
+                                <h2>Terms & Conditions</h2>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- health tip Page -->
+        <div data-role="page" id='healthtips' data-theme='b'>
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <a href="#home" data-theme='b'><i class='icon-reorder'></i></a>
+                <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+                <a href='#index' data-theme='b'><i class='icon-home'></i></a>
+            </div>
+
+
+            <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+
+
+                <div id='activity' style='background-color:white;margin:10px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Doctor profile Page -->
+        <div data-role="page" id='doctorprofile' data-theme='b'>
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <a href="#home" data-theme='b'><i class='icon-reorder'></i></a>
+                <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+                <a href='index.html' data-theme='b'><i class='icon-home'></i></a>
+            </div>
+            <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+                <div id='activity' style='background-color:white;margin:10px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+                    <h2 style='text-align:center;color:#e67817'>Doctors' Profile</h2>
+                    <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
+                        <li data-role="list-divider" style='background-color:#ffad01;color:white'></li>
+                        <li>
+                            <a href='#'>
+                                <img src='img/doc4c.png' width='80' height='80' style='border-radius:6px;' />
+                                <h2>Dr. Oluwatosin Adenuga-Taiwo</h2>
+                               <p>
+                               A young and resourceful Clinician, Dr. Tosin Adenuga-Taiwo graduated from the College of Medicine of the University of Lagos in 2010 with an M.B.B.S degree. She then went through her internship at the Lagos University Teaching Hospital, Idi-Araba, Lagos. Tosin was posted to Adamawa State during her NYSC year, where she worked at the Government Hospital, Garkida. Since then, she has worked with Omni Medical Centre, and is now with the University of Lagos Medical Centre.     
+                               </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href='#'>
+                                <img src='img/doc1c.png' width='80' height='80' style='border-radius:6px;' />
+                                <h2>Dr. Otutu Adams</h2>
+                               <p>Born in bustling Lagos, Otutu Adams has always been something of kindred spirit with the city itself- dynamic, driven, and full of new ideas. He graduated from the College of Medicine of the University of Lagos in 2004 with an M.B.B.S degree and underwent his internship at the Lagos University Teaching Hospital, before serving as an NYSC doctor at the Federal Medical Centre, Abeokuta. He has since then worked at County Hopsital, Ogba, Healthcare International, and now Pathcare Nigeria Ltd. He is currently pursuing a Masters degree in Public Health (MPH) from the prestigious London School of Hygiene &Tropical Medicine.</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href='#'>
+                                <img src='img/doc2c.png' width='80' height='80' style='border-radius:6px;' />
+                                <h2>Dr. Adetunji Bakare</h2>
+                                <p>
+                                    Dr. Tunji Bakare is a graduate of the University of Ibadan, where he obtained his M.B.B.S degree in 2005. After undergoing his housemanship at Adeoyo General Hospital, he entered into the Residency programme in Anaesthesia at the University College Hospital, Ibadan from 2006 to 2008. He then proceeded to the Institute of Tropical Medicine & International Health, Charite University, Berlin, Germany where he obtained a Diploma in Tropical Medicine and Public Health (DTMPH) in 2008, and a Master of Science in International Health (MScIH) degree in April 2010. Since returning to Nigeria he has worked at Healthcare International (quality assurance and client relations ), and volunteered at the APIN Plus Clinics located in Adeoyo General Hospital, Ibadan, and LUTH, Lagos. 
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href='#'>
+                                <img src='img/doc3c.png' width='80' height='80' style='border-radius:6px;' />
+                                <h2>Dr. Olumide Oniye</h2>
+                                <p>
+                                    Born in Idoani, Ondo State, Dr. Olumide Oniye was raised and educated in Lagos. He attended the Command Day Secondary School, Ikeja, Lagos, and thereafter gained admission to study Medicine at the College of Medicine of the University of Lagos. He completed his studies in 2009, and then obtained a certificate in Renal Medicine from the University of Edinburgh in Scotland. He underwent his housemanship training at the Lagos University Teaching Hospital, Idi-Araba, Lagos. He has worked as a medical officer in various clinical and industrial settings. 
+                                </p>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <!-- Terms and Conditions Page -->
+        <div data-role="page" id='tnc' data-theme='b'>
+
+
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <a href="#home" data-theme='b'><i class='icon-reorder'></i></a>
+                <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+                <a href='index.html' data-theme='b'><i class='icon-home'></i></a>
+            </div>
+            <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+                <div id='activity' style='background-color:white;margin:10px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+
+                    <h2 style='text-align:center;color:#e67817'>Terms & Conditions</h2>
+                    <h3> Introduction </h3>
+
+                    <p>You will be required to accept these terms and conditions, as well as the Standard Subscription and Purchase Terms and Conditions applicable to all of "Call a  doctor" services and products, which are likewise set out above on the Call a doctor Website.<br>
+                        Call a  doctor  is a subscription based electronic platform and medium for consumers to telephonically, electronically or digitally converse with a registered Health Professions Council of Nigeria medical practitioner. If and to the extent a medical practitioner from a jurisdiction other than Nigeria uses the Call a  doctor Platform such medical practitioner will likewise be registered and accredited within the jurisdiction in which he or she operates.
+                    </p>
+                    <h3>Legal Basis</h3>
+                    <p>
+                        The medico-legal relationship, if any, created by the doctor receiving your calls upon your request, or text you in response to your text based message, is by and between you and the attending doctor.
+                    </p>
+                    <h3>Age</h3>
+                    <p> You represent and warrant that you are at least 18 years of age and that you possess the legal right and ability to enter into an agreement with the attending doctor and/or call a doctor. If you are under the age of 18, you must have your parents' consent.</p>
+
+                    <h3>Within Nigeria</h3>
+                    <p>Unless otherwise specifically agreed to in Writing by Call a doctor</p>
+                    (i)         You must be within the borders of Call a doctor<br>
+                    (ii)       No services can nor will be provided to any person not in Nigeria.<br>
+                    Save as may be provided for below, if you are not within Nigeria, you are deemed to be within these borders and  under the jurisdiction of the Nigeria courts for any matter that may arise relating to Call a doctor.<br>
+                    Notwithstanding the a foregoing, only if and to the extent the Subscriber has subscribed for the Selected Service on and/or through a Third Party Benefit Program, then and in that event to the extent the jurisdiction in any agreement by and between Call a  doctor and the Third Party Benefits Program has specifically been varied particularly for the Subscriber of that Third Party Benefits Program from the jurisdiction herein provided for ("Third Party Benefit Program Agreement"), the jurisdiction specifically applicable to the Subscribers in the Third Party Benefit Program Agreement will then apply by and between the Subscribers.                        
+                    <h3>Disclosure of All Relevant Information</h3>
+                    These services are provided in good faith based upon the information given by you, during the phone call or text message. As such, you are required to disclose all relevant information, no matter how trivial, pertaining to your current health and past medical history that may have a bearing on the services to be so provided.
+                    <h3>Rights - YOUR CHOICE</h3>
+                    It is your right not to use the Selected Services. It is your right to ask the attending doctor any question to solicit information of an educational nature to empower you with information to make an informed decision. Please note that by participating in any call or text based interaction with an attending doctor you will be signifying your consent to participate in such call or receiving educational information only. The attending doctor cannot and will not diagnose you or offer treatment, merely give you guidance as to what the correct medical process would be if and to the extent of a particular condition. All calls will be recorded and kept confidential. All text based messages will be archived and kept confidential.<br>
+                    The service you receive is not clinical medical advice, but rather preventative healthcare information of an educational nature to empower you to make an informed decision and choice; it does not replace and is not intended to replace in person medical care, advice, instruction or treatment. As such, you are urged to immediately seek medical treatment if and to the extent the reason for your call persists.<br>
+                    <h3>No warranty</h3>
+                    Call a doctor and the attending doctor:<br>
+                    (i)      Make no warranty as to the content of any information and/or response<br>
+                    (ii)     Do not guarantee that a conversation with a doctor via the telephone and/or text message is the appropriate course of action for your particular health care problem.<br>
+                    No change in health condition
+                    You undertake to contact your doctor immediately should your condition change or your symptoms worsen. If you require urgent care, you should contact your local emergency services immediately. Any and all services that you acquire through Call a doctor and the attending doctor shall be solely for your personal use and/or that of your family member requiring the services.<br>
+                    <h3>Risks</h3>
+                    You understand and accept that there is an inherent risk in not having a physical examination. Your use of the services is at your sole risk and you assume full responsibility for all risks associated therewith. All information or services provided through the Call a doctor Services are provided without any warranty of any kind, express or implied. To the fullest extent permissible under Nigeria law,  Call a doctor and the attending doctor, their shareholders, affiliates, directors, officers, managers, employees, advisers and/or other representatives hereby disclaim all representations and warranties, express or implied, statutory or otherwise, including but not limited to warranties of fitness for a particular purpose. Without limiting the aforegoing, there is and shall be no warranty as to the reliability, accuracy, timeliness, usefulness, adequacy, completeness or suitability of the services and/or the products so provided.<br>
+                    <h3>Limitation of Liability</h3>
+                    Call a doctor and the attending doctor shall not be liable for any direct damages in excess of:The subscription price of any service subscribed or paid for.In addition, to the maximum extent permitted by law, Call  a doctor  and the attending doctor shall not be liable for any special, punitive, indirect, incidental or consequential damages, including but not limited to personal injury, wrongful death or loss of use, whether in any action in warranty, contract, delict (including, but not limited to negligence or fundamental breach), or otherwise arising out of or in any way connected with the use of, or the inability to use, these services or any product proffered or acquired through these services or any material or information contained in, accessed through, or products purchased through these services.<br>
+
+                    Indemnity
+
+                    You indemnify, defend and hold harmless Call a doctor  and the attending doctor and their affiliates from and against all losses, liability, expenses, damages and costs, including all attorney’s fees, arising out of or related to any breach of the terms of use, your relationship with Call a doctor  and the attending doctor any negligent or wrongful action or omission by you related to your use of services through Call a  doctor, or any negligent or wrongful use of the services, including negligent or wrongful conduct by you or any other person acting on your behalf.<br>
+
+                    Waiver
+                    Call a doctor shall not be responsible or liable, directly or indirectly, for any damage or loss caused, or alleged to be caused, by or in connection with, use of or reliance on, any information, products and/or services available on or through Call a doctor and/or all those associated and/or affiliated with it, including the attending doctors. Accordingly, in consideration for the services so provided, you, the subscriber requesting the call back, hereby waive your or your family member’s (including but not limited to that of your and your minor child’s estate and/or any beneficiary thereunder) <br>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <!-- about Page -->
+        <div data-role="page" id='about' data-theme='b'>
+
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <a href="#home" data-theme='b'><i class='icon-reorder'></i></a>
+                <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+                <a href='index.html' data-theme='b'><i class='icon-home'></i></a>
+            </div>
+
+
+            <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+                <div id='activity' style='background-color:white;margin:10px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+                    <h2 style='text-align:center;color:#e67817'>About mHealth</h2>
+                    <p>
+                        <strong>Speak to a Doctor</strong><br> Why not dial our short code or long number to speak with our listed Doctors and get professional advice at the cost of a mobile call?
+                    </p>
+                    <p>
+                        <strong>SMS Alerts Tips</strong> <br> Register for medical tips, advice and many more to stay ahead of your personal health programme? Get daily tips that will help take preventive measures so you remain healthy and receive guidance with chronic health conditions such as Diabetes, Cholesterol, Hypertension, etc.
+                    </p><p>
+                        You may also want to take get daily tips for weight loss, stop smoking, pregnancy, women health, men grooming etc. </p>
+                    <p>
+                        <strong>Registered Pharmacist/Chemists</strong><br> Gain access to genuine and professional medication and advice from our vetted list of Pharmacists or Chemists in the area closest to you. </p>
+                </div>
+                <div id='activity' style='background-color:white;margin:10px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Subscription Page -->
+        <div data-role="page" id='subscribe' data-theme='b'>
+
+            <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+                <a href="#home" data-theme='b'><i class='icon-reorder'></i></a>
+                <h1 style='text-align: center'><img src='img/mhealth.png'/></h1>
+                <a href='index.html' data-theme='b'><i class='icon-home'></i></a>
+            </div>
+
+
+            <div data-role='content' style='background-color:#e2e2e2; height:800px; padding:10px'>
+                <div id='activity' style='background-color:white;margin:10px;-webkit-box-shadow: 7px 6px 9px rgba(50, 50, 50, 0.75);-moz-bx-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);box-shadow:7px 6px 9px rgba(50, 50, 50, 0.75);'>
+                    <h2 style='text-align:center;color:#e67817'>Manage Subscription</h2>
+                    <form action="" method="POST" id="subform" style="margin-left: 5px; margin-right: 5px">
+                        <!-- /demo-html -->
+                        <div data-demo-html="true">
+                            <label for="phone">Phone Number:</label>
+                            <input type="text" placeholder="234XXXXXXXXXX" name="phone" pattern="[0-9]*" id="phone" value="" autocomplete="off" required />
+                        </div>
+                        <div data-demo-html="true">
+                            <label for="pin">PIN:</label>
+                            <input type="password" placeholder="4-Digit Pin Here" name="passcode" pattern="[0-9]*" id="passcode" value="" autocomplete="off" required />
+                        </div>
+                        <div data-demo-html="true">
+                            <label>mHealth Service:</label>
+                            <select name="service" id="service">
+                                <option value="HIV/AIDS">HIV/AIDS</option>
+                                <option value="Hypertension">Hypertension</option>
+                                <option value="Diabetes">Diabetes</option>
+                                <option value="Typhoid">Typhoid</option>
+                                <option value="Exercise and Fitness">Exercise and Fitness</option>
+                                <option value="General health">General health</option>
+                                <option value="STD">STD</option>
+                                <option value="Amenorrhoea">Amenorrhoea</option>
+                                <option value="Fertility">Fertility</option>
+                                <option value="Cholesterol">Cholesterol</option>
+                                <option value="Blood sugar control">Blood sugar control</option>
+                                <option value="Women's health">Women's health</option>
+                                <option value="Fibroids">Fibroids</option>
+                                <option value="Cancer">Cancer</option>
+                                <option value="Pelvic Inflammatory Disease">Pelvic Inflammatory Disease</option>
+                                <option value="Pregnancy">Pregnancy</option>
+                            </select>
+                        </div>
+                        <!-- /demo-html -->
+                        <div> 
+                            <button type="submit" id='subscribebutton' data-mini="true" data-inline="true">
+                                <a href="#"><i class="buttony fa-sign-in fa-lg"></i> Subscribe</a></button>
+                            <button type="submit" id='unsubscribebutton' data-mini="true" data-inline="true">
+                                <a href="#"><i class="buttony fa fa-sign-out"></i> Unsubscribe</a></button>
+
+                        </div>
+
+                    </form>	
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <script src='js/nativedroid.script.js'></script>
+    </body>
+</html>
